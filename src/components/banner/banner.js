@@ -6,8 +6,12 @@
  * @describe: banner 处理
  */
 import bannerTemp from '../../template/banner.html';
-import homeTopBg from "../../images/webp/home_top_bg.webp";
-import netHomeTopBg from "../../images/webp/nothome_top_bg.webp";
+// import homeTopBg from "../../images/webp/home_top_bg.webp";
+// import netHomeTopBg from "../../images/webp/nothome_top_bg.webp";
+
+// 使用r2 cdn加速图片
+const homeTopBg = "https://pub-e1d2d60230974a5facef73ab3a7176c0.r2.dev/home_top_bg.webp";
+const netHomeTopBg = "https://pub-e1d2d60230974a5facef73ab3a7176c0.r2.dev/nothome_top_bg.webp";
 
 export default function main(_) {
 
@@ -25,7 +29,7 @@ export default function main(_) {
         if (_.__status.pageType === 'home') {
             topImg = _.__config.banner.home.background.length > 0
                 ? _.__config.banner.home.background : [homeTopBg];
-        }  else {
+        } else {
             topImg = _.__config.banner.article.background.length > 0
                 ? _.__config.banner.article.background : [netHomeTopBg];
             height = '40vh';
