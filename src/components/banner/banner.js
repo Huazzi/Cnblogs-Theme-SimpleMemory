@@ -1,17 +1,10 @@
-/**
- * UPDATES AND DOCS AT: https://github.com/BNDong
- * https://www.cnblogs.com/bndong/
- * @author: BNDong, dbnuo@foxmail.com
- * ----------------------------------------------
- * @describe: banner 处理
- */
 import bannerTemp from '../../template/banner.html';
 // import homeTopBg from "../../images/webp/home_top_bg.webp";
 // import netHomeTopBg from "../../images/webp/nothome_top_bg.webp";
 
 // 使用r2 cdn加速图片
-const homeTopBg = "https://pub-e1d2d60230974a5facef73ab3a7176c0.r2.dev/home_top_bg.webp";
-const netHomeTopBg = "https://pub-e1d2d60230974a5facef73ab3a7176c0.r2.dev/nothome_top_bg.webp";
+const homeTopBg = "https://cbc25ff.webp.li/home_top_bg.webp";
+const netHomeTopBg = "https://cbc25ff.webp.li/hua-cdn/longmao.webp";
 
 export default function main(_) {
 
