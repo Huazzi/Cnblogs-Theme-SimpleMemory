@@ -2,7 +2,7 @@ import bannerTemp from '../../template/banner.html';
 // import homeTopBg from "../../images/webp/home_top_bg.webp";
 // import netHomeTopBg from "../../images/webp/nothome_top_bg.webp";
 
-// 使用r2 cdn加速图片
+// 使用r2 cdn加速图片，并使用webp cloud优化图片
 const homeTopBg = "https://cbc25ff.webp.li/home_top_bg.webp";
 const netHomeTopBg = "https://cbc25ff.webp.li/hua-cdn/longmao.webp";
 
