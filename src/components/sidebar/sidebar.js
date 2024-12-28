@@ -10,7 +10,10 @@ import navTemp from '../../template/sidebarNav.html';
 import '../../style/menu_bubble.css';
 import main4 from './lib/main4';
 import defaultAvatarImg from './../../images/webp/default_avatar.webp';
-import defaultSidebarBgImg from './../../images/sidebar_bg_4.png';
+
+// 使用r2 cdn + webp cloud加速图片，不再使用本地图片
+// import defaultSidebarBgImg from './../../images/sidebar_bg_4.png';
+let defaultSidebarBgImg = "https://cbc25ff.webp.li/hua-cdn/sidebar_bg_5.png";
 
 export default function main(_) {
 
@@ -34,7 +37,7 @@ export default function main(_) {
 
         // ------- 设置头像 -------
         let blogAvatar = _.__config.info.avatar ? _.__config.info.avatar : defaultAvatarImg;
-        $('#menuBlogAvatar').append("<img class='img-responsive' alt='用户头像' src='"+blogAvatar+"'>");
+        $('#menuBlogAvatar').append("<img class='img-responsive' alt='用户头像' src='" + blogAvatar + "'>");
 
         // 头像动效
         if (_.__config.animate.avatar.enable) {
@@ -51,7 +54,7 @@ export default function main(_) {
      */
     (() => {
         let mbg = _.__config.sidebar.infoBackground ? _.__config.sidebar.infoBackground : defaultSidebarBgImg;
-        $('.container .menu-wrap').css('background-image', 'url(\''+mbg+'\')');
+        $('.container .menu-wrap').css('background-image', 'url(\'' + mbg + '\')');
     })();
 
     /**
@@ -64,7 +67,7 @@ export default function main(_) {
         _.__timeIds.introduceTId = window.setInterval(() => {
             let introduceHtml = $('#profile_block').html(),
                 menuIntroduce = $('.sidebar-userinfo#introduce');
-            if($('#profile_block img')[0]) introduceHtml = introduceHtml.replace('<br>', '')
+            if ($('#profile_block img')[0]) introduceHtml = introduceHtml.replace('<br>', '')
             if ((typeof introduceHtml == 'string') && menuIntroduce.html() === '') {
                 menuIntroduce.html(_.__tools.htmlFiltrationScript(introduceHtml));
                 _.__tools.clearIntervalTimeId(_.__timeIds.introduceTId);
@@ -73,9 +76,9 @@ export default function main(_) {
 
         // ------- 博客统计 -------
         _.__timeIds.blogStatsTId = window.setInterval(() => {
-            let blogStatsObj   = $('.blogStats'),
+            let blogStatsObj = $('.blogStats'),
                 statsPostCount = $('#stats_post_count'),
-                menuBlogStats  = $('.sidebar-stats');
+                menuBlogStats = $('.sidebar-stats');
             if (blogStatsObj.length > 0 && statsPostCount.length > 0) {
                 menuBlogStats.html(_.__tools.htmlFiltrationScript(blogStatsObj.html())).show();
                 blogStatsObj.html('')
@@ -86,10 +89,10 @@ export default function main(_) {
         // ------- 日历 -------
         _.__timeIds.calendarTId = window.setInterval(() => {
             let calendarTable = $('#blogCalendar'),
-                calendar      = $('#blog-calendar'),
-                menuCalendar  = $('#calendar-box');
+                calendar = $('#blog-calendar'),
+                menuCalendar = $('#calendar-box');
 
-            if (calendarTable.length > 0 && menuCalendar.html() === ''){
+            if (calendarTable.length > 0 && menuCalendar.html() === '') {
                 let calendarHtml = '<div id="blog-calendar">' + calendar.html() + '</div>';
                 calendar.remove();
                 menuCalendar.html(calendarHtml).show();
@@ -103,7 +106,7 @@ export default function main(_) {
             let sidebarSearch = $('#sidebar_search_box'),
                 menuSearchBox = $('#sb-sidebarSearchBox');
 
-            if (sidebarSearch.length > 0 && menuSearchBox.html() === ''){
+            if (sidebarSearch.length > 0 && menuSearchBox.html() === '') {
                 menuSearchBox.prepend('<div id="sb_widget_my_zzk" class="div_my_zzk"><input id="q" type="text"  autocomplete="off" placeholder="找找看..." onkeydown="return zzk_go_enter(event);" class="input_my_zzk form-control search-menu"></div>');
                 $('.sidebar-search').show();
                 _.__tools.clearIntervalTimeId(_.__timeIds.searchTId);
@@ -195,29 +198,29 @@ export default function main(_) {
 
         // ------- 最新评论 -------
         _.__timeIds.commentsTId = window.setInterval(() => {
-            let recentComments     = $('#sidebar_recentcomments ul'),
+            let recentComments = $('#sidebar_recentcomments ul'),
                 menuRecentComments = $('#sb-recentComments');
 
             let getMenuCommentsData = (obj) => {
                 let html = '<ul>',
-                    ret  = /^[1-9]+[0-9]*$/,
+                    ret = /^[1-9]+[0-9]*$/,
                     title, body, author;
 
                 if (obj.find('li').length > 2) {
-                    title  = obj.find('li.recent_comment_title');
-                    body   = obj.find('li.recent_comment_body');
+                    title = obj.find('li.recent_comment_title');
+                    body = obj.find('li.recent_comment_body');
                     author = obj.find('li.recent_comment_author');
 
-                    if (title.length !== body.length || title.length !== author.length) return ;
+                    if (title.length !== body.length || title.length !== author.length) return;
 
                     title.each((i) => {
                         let p = $(title[i]),
                             o = p.text() === p.html() ? {} : $(p.html()),
                             textArr = $.trim(p.text()).split('.');
-                        if (ret.test(textArr[0])) textArr.splice(0,1);
+                        if (ret.test(textArr[0])) textArr.splice(0, 1);
                         let text = $.trim(textArr.join('.'));
                         o.length > 0 && o.html(text);
-                        html += '<li>' + (o.length > 0 ?  o.prop("outerHTML") : "<a href='javascript:void(0);'>" + text + "</a>")
+                        html += '<li>' + (o.length > 0 ? o.prop("outerHTML") : "<a href='javascript:void(0);'>" + text + "</a>")
 
                             + '<div class="sb-recent_comment_body">'
                             + $(body[i]).text()
@@ -247,7 +250,7 @@ export default function main(_) {
                 navHtml = '<ul>';
                 $.each(navList, function (i) {
                     let iconClass = navList[i].length > 2 ? navList[i][2] : "icon-qianzishenhe";
-                    navHtml += '<li><a href="'+(navList[i][1])+'" class="sidebar-dropdown-box" target="_blank"><i class="simple-memory-iconfont simple-memory-'+iconClass+' iconfont '+iconClass+'"></i>'+(navList[i][0])+'</a></li>';
+                    navHtml += '<li><a href="' + (navList[i][1]) + '" class="sidebar-dropdown-box" target="_blank"><i class="simple-memory-iconfont simple-memory-' + iconClass + ' iconfont ' + iconClass + '"></i>' + (navList[i][0]) + '</a></li>';
                 });
                 navHtml += '</ul>';
                 $('.customize-nav').append(navHtml).show();
@@ -261,8 +264,8 @@ export default function main(_) {
                 $.each(customData, (title, list) => {
                     let html = '<li class="ng-star-inserted sidebar-dropdown">';
                     html += '<a href="javascript:void(0)" class="ng-star-inserted sidebar-dropdown-box">';
-                    html += '   <i class="simple-memory-iconfont iconfont '+ list.icon +'"></i>';
-                    html += '   <span class="sidebar-dropdown-title">'+ title +'</span>';
+                    html += '   <i class="simple-memory-iconfont iconfont ' + list.icon + '"></i>';
+                    html += '   <span class="sidebar-dropdown-title">' + title + '</span>';
                     html += '</a>';
                     html += '<div class="sidebar-submenu"><ul>';
 
@@ -292,15 +295,15 @@ export default function main(_) {
 
         function getMenuData(obj) {
             let html = '<ul>',
-                ret  = /^[1-9]+[0-9]*$/;
+                ret = /^[1-9]+[0-9]*$/;
             obj.each((i) => {
                 let p = $(obj[i]),
                     o = p.text() === p.html() ? {} : $(p.html()),
                     textArr = $.trim(p.text()).split('.');
-                if (ret.test(textArr[0])) textArr.splice(0,1);
+                if (ret.test(textArr[0])) textArr.splice(0, 1);
                 let text = $.trim(textArr.join('.'));
                 o.length > 0 && o.html(text);
-                html += '<li>' + (o.length > 0 ?  o.prop("outerHTML") : '<a href="javascript:void(0);">' + text + '</a>' ) + '</li>';
+                html += '<li>' + (o.length > 0 ? o.prop("outerHTML") : '<a href="javascript:void(0);">' + text + '</a>') + '</li>';
             });
             html += '</ul>';
             return html;
@@ -312,25 +315,25 @@ export default function main(_) {
      */
     (() => {
         $('.sidebar-menu a.sidebar-dropdown-box').on('click', function () {
-           let obj  = $(this);
-           let pObj = obj.parent('li.sidebar-dropdown');
-           let lObj = pObj.find('.sidebar-submenu');
-           if (lObj.length > 0) {
-               if (pObj.hasClass('active')) {
-                   // 收起
-                   pObj.removeClass('active');
-                   lObj.slideUp(300);
-               } else {
-                   // 展开
-                   pObj.addClass('active');
-                   lObj.slideDown(300);
-               }
-               setTimeout(function () {
-                   if (mainObj && typeof mainObj.myOptiscrollInstance !== 'undefined') {
-                       mainObj.myOptiscrollInstance.update();
-                   }
-               }, 300);
-           }
+            let obj = $(this);
+            let pObj = obj.parent('li.sidebar-dropdown');
+            let lObj = pObj.find('.sidebar-submenu');
+            if (lObj.length > 0) {
+                if (pObj.hasClass('active')) {
+                    // 收起
+                    pObj.removeClass('active');
+                    lObj.slideUp(300);
+                } else {
+                    // 展开
+                    pObj.addClass('active');
+                    lObj.slideDown(300);
+                }
+                setTimeout(function () {
+                    if (mainObj && typeof mainObj.myOptiscrollInstance !== 'undefined') {
+                        mainObj.myOptiscrollInstance.update();
+                    }
+                }, 300);
+            }
         });
     })();
 
@@ -351,11 +354,11 @@ export default function main(_) {
      * 设置是否默认展开菜单栏
      */
     (() => {
-        let submenuShow = (obj)  => {
+        let submenuShow = (obj) => {
             obj.show().parent('li.sidebar-dropdown').addClass('active');
         }
         if (_.__config.sidebar.submenu.pointsRank) submenuShow($('#sb-sidebarScorerank'));
-        if (_.__config.sidebar.submenu.latestPosts) submenuShow( $('#sb-sidebarRecentposts'));
+        if (_.__config.sidebar.submenu.latestPosts) submenuShow($('#sb-sidebarRecentposts'));
         if (_.__config.sidebar.submenu.myTags) submenuShow($('#sb-toptags'));
         if (_.__config.sidebar.submenu.postsClassify) submenuShow($('#sb-classify'));
         if (_.__config.sidebar.submenu.articleClassify) submenuShow($('#sb-ArticleCategory'));
