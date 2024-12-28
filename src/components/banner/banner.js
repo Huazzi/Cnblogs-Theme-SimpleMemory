@@ -2,8 +2,8 @@ import bannerTemp from '../../template/banner.html';
 // import homeTopBg from "../../images/webp/home_top_bg.webp";
 // import netHomeTopBg from "../../images/webp/nothome_top_bg.webp";
 
-// 使用r2 cdn + webp cloud加速图片，不再使用本地图片
-const homeTopBg = "https://cbc25ff.webp.li/home_top_bg.webp";
+// 使用r2 cdn加速图片，并使用webp cloud优化图片
+const homeTopBg = "https://cbc25ff.webp.li/home_top_bg.webp";   // 这两行URL需要替换成自己的经过webp cloud代理的URL
 const netHomeTopBg = "https://cbc25ff.webp.li/hua-cdn/longmao.webp";
 
 export default function main(_) {
